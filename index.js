@@ -3,8 +3,8 @@ const axios = require('axios');
 const { Pool } = require('pg');
 const express = require('express');
 
-// Token oficial actualizado
-const bot = new Telegraf('8664870579:AAFnGiYkELkVqHnyEUKF2YZJjQYNZn--Y-U'); 
+// Token oficial NUEVO y actualizado
+const bot = new Telegraf('8664870579:AAH-H8QYIA5qIA5z4HfszktMNI9viBDj08E'); 
 
 // ID del Dueño Absoluto
 const OWNER_ID = 8116120039;
@@ -273,8 +273,23 @@ bot.on('text', async (ctx) => {
     }
 });
 
+// --- CONFIGURACIÓN PARA RENDER (EXPRESS) ---
 const app = express();
-app.get('/', (req, res) => res.send('Bot Activo'));
-app.listen(process.env.PORT || 3000, () => console.log("Bot listo."));
+const PORT = process.env.PORT || 3000;
 
-bot.launch();
+app.get('/', (req, res) => {
+    res.send('Bot Activo y Corriendo');
+});
+
+app.listen(PORT, () => {
+    console.log(`🤖 Servidor web listo en el puerto ${PORT}`);
+    
+    bot.launch()
+        .then(() => console.log("🚀 Bot de Telegram iniciado correctamente con el nuevo token."))
+        .catch((err) => {
+            console.error("❌ Error al iniciar Telegram:", err.message);
+        });
+});
+
+process.once('SIGINT', () => bot.stop('SIGINT'));
+process.once('SIGTERM', () => bot.stop('SIGTERM'));
