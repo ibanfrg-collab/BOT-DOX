@@ -3,8 +3,8 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 const express = require('express');
 
-// Token oficial configurado
-const bot = new Telegraf('8664870579:AAGIej251Y_tj2n6VcESVjAyvxcFeoy0TVo'); 
+// NUEVO Token oficial actualizado por el usuario
+const bot = new Telegraf('8664870579:AAFnGiYkELkVqHnyEUKF2YZJjQYNZn--Y-U'); 
 
 // ID del Dueño Absoluto
 const OWNER_ID = 8116120039;
@@ -245,7 +245,7 @@ bot.on('text', async (ctx) => {
     }
 });
 
-// Servidor express para Render / Railway
+// Servidor express para que Render mantenga vivo el servicio
 const app = express();
 app.get('/', (req, res) => res.send('Bot Activo'));
 app.listen(process.env.PORT || 3000, () => console.log("Bot listo."));
